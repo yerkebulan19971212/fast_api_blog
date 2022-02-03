@@ -6,7 +6,7 @@ from sqlalchemy import pool
 
 from alembic import context
 
-sys.path = ['', '..'] + sys.path[1:]
+# sys.path = ['', '..'] + sys.path[1:]
 
 from core.db import Base, SQLALCHEMY_DATABASE_URL
 
@@ -22,7 +22,7 @@ fileConfig(config.config_file_name)
 # for 'autogenerate' support
 # from myapp import mymodel
 target_metadata = Base.metadata
-target_metadata = None
+# target_metadata = None
 
 
 # other values from the config, defined by the needs of env.py,
@@ -44,7 +44,7 @@ def run_migrations_offline():
 
     """
     # url = config.get_main_option("sqlalchemy.url")
-    url = config.get_main_option(SQLALCHEMY_DATABASE_URL)
+    url = SQLALCHEMY_DATABASE_URL
     context.configure(
         url=url,
         target_metadata=target_metadata,
@@ -64,7 +64,7 @@ def run_migrations_online():
 
     """
     configuration = config.get_section(config.config_ini_section)
-    configuration['sqlalchemy.ulr'] = SQLALCHEMY_DATABASE_URL
+    configuration['sqlalchemy.url'] = SQLALCHEMY_DATABASE_URL
     connectable = engine_from_config(
         configuration,
         prefix="sqlalchemy.",
